@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 import { createServiceRoleClient } from "@/lib/supabase/server";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { signOutAction } from "./actions";
 
 const ROLE_LABELS: Record<string, string> = {
   admin: "Admin",
@@ -124,19 +125,20 @@ export default async function AdminLayout({
               />
             </>
           )}
-          {/* wired in Task 16 */}
-          <Button
-            variant="ghost"
-            size="xs"
-            disabled
-            className="text-xs"
-            style={{
-              color: "oklch(0.50 0.008 220)",
-              fontFamily: "var(--font-sans)",
-            }}
-          >
-            Sair
-          </Button>
+          <form action={signOutAction}>
+            <Button
+              type="submit"
+              variant="ghost"
+              size="xs"
+              className="text-xs"
+              style={{
+                color: "oklch(0.65 0.008 220)",
+                fontFamily: "var(--font-sans)",
+              }}
+            >
+              Sair
+            </Button>
+          </form>
         </div>
       </header>
 
