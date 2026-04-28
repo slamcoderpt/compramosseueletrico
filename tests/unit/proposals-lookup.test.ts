@@ -26,19 +26,19 @@ describe("decideProposalView", () => {
 
   it("returns REDIRECT to /aceite for ACCEPTED", () => {
     const r = decideProposalView({ ...base, status: "ACCEPTED" });
-    expect(r.action).toBe("REDIRECT");
+    if (r.action !== "REDIRECT") throw new Error("expected REDIRECT");
     expect(r.target).toMatch(/\/aceite$/);
   });
 
   it("returns REDIRECT to /recusada for REJECTED", () => {
     const r = decideProposalView({ ...base, status: "REJECTED" });
-    expect(r.action).toBe("REDIRECT");
+    if (r.action !== "REDIRECT") throw new Error("expected REDIRECT");
     expect(r.target).toMatch(/\/recusada$/);
   });
 
   it("returns REDIRECT to /expirada for EXPIRED status", () => {
     const r = decideProposalView({ ...base, status: "EXPIRED" });
-    expect(r.action).toBe("REDIRECT");
+    if (r.action !== "REDIRECT") throw new Error("expected REDIRECT");
     expect(r.target).toMatch(/\/expirada$/);
   });
 
@@ -47,7 +47,7 @@ describe("decideProposalView", () => {
       ...base,
       expires_at: new Date(Date.now() - 1000).toISOString(),
     });
-    expect(r.action).toBe("REDIRECT");
+    if (r.action !== "REDIRECT") throw new Error("expected REDIRECT");
     expect(r.target).toMatch(/\/expirada$/);
   });
 });
