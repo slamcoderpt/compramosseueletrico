@@ -28,3 +28,17 @@ export const leadsRateLimit = (() => {
     return l;
   };
 })();
+
+export const proposalActionRateLimit = (() => {
+  let l: Ratelimit | null = null;
+  return () => {
+    if (!l) {
+      l = new Ratelimit({
+        redis: getRedis(),
+        limiter: Ratelimit.slidingWindow(5, "1 m"),
+        prefix: "rl:proposal-action",
+      });
+    }
+    return l;
+  };
+})();
