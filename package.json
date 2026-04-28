@@ -19,6 +19,7 @@
     "@base-ui/react": "^1.4.1",
     "@calcom/embed-react": "^1.5.3",
     "@hookform/resolvers": "^5.2.2",
+    "@sentry/nextjs": "^10.50.0",
     "@supabase/ssr": "^0.10.2",
     "@supabase/supabase-js": "^2.104.1",
     "@upstash/ratelimit": "^2.0.8",
