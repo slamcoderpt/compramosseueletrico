@@ -13,11 +13,6 @@ export default defineConfig({
       NEXT_PUBLIC_SUPABASE_URL: "http://127.0.0.1:54321",
       NEXT_PUBLIC_SITE_URL: "http://localhost:3000",
     },
-    poolOptions: {
-      threads: {
-        singleThread: true,
-      },
-    },
     fileParallelism: false,
   },
   resolve: {
