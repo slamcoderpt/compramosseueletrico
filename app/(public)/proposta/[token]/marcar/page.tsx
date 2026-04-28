@@ -1,123 +1,110 @@
-import Link from "next/link";
-import { Calendar, Phone, Mail, Clock } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { notFound } from "next/navigation";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { Metadata } from "next";
+import { Calendar, Mail, Phone, Clock } from "lucide-react";
+import Link from "next/link";
+import { createServiceRoleClient } from "@/lib/supabase/server";
+import { isValidTokenShape } from "@/lib/proposals/tokens";
+import { BookingEmbed } from "./booking-embed";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Marcar visita — compramososeueletrico",
-  description:
-    "Marca uma visita ao nosso espaço para validarmos o teu carro elétrico e pagarmos no próprio dia.",
+  description: "Escolhe o melhor horário para a inspeção do teu carro elétrico.",
 };
 
-interface Props {
+interface PageProps {
   params: Promise<{ token: string }>;
 }
 
-export default async function MarcarVisitaPage({ params }: Props) {
+export default async function MarcarPage({ params }: PageProps) {
   const { token } = await params;
-  const ref = token.slice(0, 8).toUpperCase();
+  if (!isValidTokenShape(token)) notFound();
+
+  const supabase = createServiceRoleClient();
+  const { data: proposal } = await supabase
+    .from("proposals")
+    .select("id, status, leads:lead_id(nome, email, marca, modelo, telefone)")
+    .eq("token", token)
+    .maybeSingle();
+
+  if (!proposal) notFound();
+
+  const lead = (proposal as any).leads;
+  const calLink = process.env.CALCOM_EVENT_TYPE_LINK;
+
+  if (!calLink) {
+    return <Fallback token={token} />;
+  }
 
   return (
-    <div className="min-h-[calc(100vh-7rem)] flex items-center justify-center px-4 py-16 sm:py-24">
-      <div className="w-full max-w-lg mx-auto space-y-10">
+    <main className="container mx-auto max-w-4xl py-8 px-4">
+      <header className="mb-6 text-center">
+        <h1 className="text-2xl md:text-3xl font-semibold mb-2">Marca a tua visita</h1>
+        <p className="text-muted-foreground">
+          Escolhe um horário para o {lead.marca} {lead.modelo}. A inspeção demora cerca de 30 minutos.
+        </p>
+      </header>
+      <BookingEmbed
+        calLink={calLink}
+        token={token}
+        prefillName={lead.nome}
+        prefillEmail={lead.email}
+      />
+      <p className="text-xs text-muted-foreground/60 text-center mt-6 font-mono">
+        Refª {token.slice(0, 8)}
+      </p>
+    </main>
+  );
+}
 
-        {/* Hero icon */}
-        <div className="flex justify-center">
-          <div className="rounded-2xl bg-primary/8 p-5 ring-2 ring-primary/20">
-            <Calendar
-              className="size-14 text-primary"
-              strokeWidth={1.5}
-              aria-hidden="true"
-            />
+function Fallback({ token }: { token: string }) {
+  return (
+    <main className="container mx-auto max-w-lg py-12 px-4">
+      <Card>
+        <CardHeader className="text-center">
+          <div className="mx-auto mb-4 size-16 rounded-full bg-primary/10 grid place-items-center text-primary">
+            <Calendar className="size-8" />
           </div>
-        </div>
-
-        {/* Headline + subtext */}
-        <div className="space-y-4 text-center">
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight text-foreground">
-            Marcação de visita
-          </h1>
-          <p className="text-base text-muted-foreground leading-relaxed max-w-sm mx-auto">
-            A marcação online estará disponível em breve. Por agora,
-            contacta-nos para combinar.
+          <CardTitle className="text-2xl">Marcação de visita</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <p className="text-center text-muted-foreground">
+            A marcação online estará disponível em breve. Por agora, contacta-nos para combinar.
           </p>
-        </div>
-
-        {/* Contact card */}
-        <div className="rounded-xl border border-border bg-card p-5 space-y-4">
-          <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground font-mono">
-            Contacta-nos
-          </p>
-          <div className="space-y-4">
-            <a
-              href="tel:+351210000000"
-              className="flex items-center gap-3 group"
-              aria-label="Ligar para +351 21X XXX XXX"
-            >
-              <Phone
-                className="size-4 text-primary shrink-0"
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-              <span className="text-sm font-mono tracking-wide text-foreground group-hover:text-primary transition-colors">
-                +351 21X XXX XXX
-              </span>
-            </a>
-            <a
-              href="mailto:ola@compramososeueletrico.pt"
-              className="flex items-center gap-3 group"
-              aria-label="Enviar email para ola@compramososeueletrico.pt"
-            >
-              <Mail
-                className="size-4 text-primary shrink-0"
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-              <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">
-                ola@compramososeueletrico.pt
-              </span>
-            </a>
-            <div className="flex items-center gap-3">
-              <Clock
-                className="size-4 text-primary shrink-0"
-                strokeWidth={1.75}
-                aria-hidden="true"
-              />
-              <span className="text-sm text-muted-foreground">
-                9h–19h, dias úteis
-              </span>
+          <div className="rounded-lg border p-4 space-y-3">
+            <div className="flex items-center gap-3 text-sm">
+              <Phone className="size-4 text-muted-foreground" />
+              <span className="font-mono">+351 21X XXX XXX</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <Mail className="size-4 text-muted-foreground" />
+              <span className="font-mono">ola@compramososeueletrico.pt</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm">
+              <Clock className="size-4 text-muted-foreground" />
+              <span>9h-19h, dias úteis</span>
             </div>
           </div>
-        </div>
-
-        {/* Info alert */}
-        <Alert>
-          <AlertTitle>Aceitação recebida</AlertTitle>
-          <AlertDescription>
-            Recebemos a tua aceitação. Vamos contactar-te dentro de 24h se não
-            nos contactares antes.
-          </AlertDescription>
-        </Alert>
-
-        {/* Back CTA */}
-        <Link
-          href={`/proposta/${token}/aceite`}
-          className={cn(
-            buttonVariants({ variant: "outline", size: "lg" }),
-            "w-full justify-center py-3 h-auto text-base"
-          )}
-        >
-          Voltar
-        </Link>
-
-        {/* Reference footer */}
-        <p className="text-center text-xs font-mono opacity-40 tracking-widest">
-          Refª da proposta: {ref}
-        </p>
-
-      </div>
-    </div>
+          <Alert>
+            <AlertDescription>
+              Recebemos a tua aceitação. Vamos contactar-te dentro de 24h se não nos contactares antes.
+            </AlertDescription>
+          </Alert>
+          <div className="flex justify-center">
+            <Link
+              href={`/proposta/${token}/aceite`}
+              className={cn(buttonVariants({ variant: "outline" }))}
+            >
+              Voltar
+            </Link>
+          </div>
+          <p className="text-xs text-muted-foreground/60 text-center font-mono">
+            Refª {token.slice(0, 8)}
+          </p>
+        </CardContent>
+      </Card>
+    </main>
   );
 }
