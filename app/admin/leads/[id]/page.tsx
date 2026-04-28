@@ -16,6 +16,7 @@ import { formatPtDateTime } from "@/lib/format/date";
 import { LeadDeclaration } from "@/components/admin/LeadDeclaration";
 import { ProposalForm } from "@/components/admin/ProposalForm";
 import { Timeline } from "@/components/admin/Timeline";
+import { ForgetButton } from "@/components/admin/ForgetButton";
 import {
   Tooltip,
   TooltipContent,
@@ -515,6 +516,47 @@ export default async function LeadDetailPage({
           sms_log={smsLog as Parameters<typeof Timeline>[0]["sms_log"]}
           bookings={bookings as Parameters<typeof Timeline>[0]["bookings"]}
         />
+
+        {/* ─── Zona de risco ─────────────────────────────────────────────── */}
+        <section className="mt-16 mb-8">
+          {/* Diagonal warning band — restrained, deliberate */}
+          <div
+            className="h-[2px] w-full mb-6"
+            style={{
+              background:
+                "repeating-linear-gradient(135deg, oklch(0.45 0.18 25 / 0.30) 0 8px, transparent 8px 18px)",
+            }}
+            aria-hidden
+          />
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div className="space-y-1">
+              <p
+                className="text-[10px] uppercase tracking-[0.18em]"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  color: "oklch(0.55 0.10 25)",
+                }}
+              >
+                Zona de risco
+              </p>
+              <p
+                className="text-[11px] leading-relaxed max-w-md"
+                style={{
+                  fontFamily: "var(--font-mono)",
+                  color: "oklch(0.42 0.006 220)",
+                }}
+              >
+                Eliminação ao abrigo do RGPD. Apaga lead, propostas, eventos e
+                SMS log. Audit preservado em{" "}
+                <span style={{ color: "oklch(0.55 0.008 220)" }}>
+                  gdpr_deletions
+                </span>
+                .
+              </p>
+            </div>
+            <ForgetButton leadId={lead.id} />
+          </div>
+        </section>
       </div>
     </div>
   );
