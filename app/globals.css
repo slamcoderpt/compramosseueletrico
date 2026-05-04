@@ -64,12 +64,12 @@
 }
 
 :root {
-  /* Pure white — clinical, refined, Tesla-clean */
-  --background: oklch(1 0 0);
+  /* Soft warm-gray background — cards pop against it */
+  --background: oklch(0.97 0.002 90);
   /* Near-black with imperceptible cool undertone */
   --foreground: oklch(0.14 0.002 240);
 
-  /* Cards same as background — flat, no surface differentiation by default */
+  /* Cards: pure white, elevated against the soft gray bg */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.14 0.002 240);
 
@@ -114,8 +114,12 @@
   --chart-4: oklch(0.78 0.002 240);
   --chart-5: oklch(0.55 0.10 185);
 
-  /* Radius: 0.5rem — tight, modern */
-  --radius: 0.5rem;
+  /* Radius: 0.75rem — soft cards without being bubbly */
+  --radius: 0.75rem;
+
+  /* Card shadows — refined, multi-layer (not generic Tailwind defaults) */
+  --shadow-card: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 12px oklch(0 0 0 / 0.04);
+  --shadow-card-hover: 0 1px 2px oklch(0 0 0 / 0.06), 0 8px 24px oklch(0 0 0 / 0.06);
 
   /* Sidebar — same monochrome system */
   --sidebar: oklch(0.98 0 0);
