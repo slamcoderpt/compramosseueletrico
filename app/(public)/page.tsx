@@ -413,230 +413,348 @@ function ProposalPreviewCard() {
       className="relative isolate overflow-hidden rounded-3xl text-white"
       style={{
         background:
-          "radial-gradient(ellipse 100% 70% at 100% 0%, oklch(0.20 0.04 220) 0%, transparent 60%)," +
-          "linear-gradient(160deg, oklch(0.13 0.012 220) 0%, oklch(0.08 0.008 220) 100%)",
+          "radial-gradient(ellipse 90% 60% at 100% 0%, oklch(0.18 0.025 220) 0%, transparent 55%)," +
+          "radial-gradient(ellipse 80% 50% at 0% 100%, color-mix(in oklab, var(--brand) 12%, transparent) 0%, transparent 60%)," +
+          "linear-gradient(165deg, oklch(0.12 0.010 230) 0%, oklch(0.06 0.005 230) 100%)",
         boxShadow:
-          "0 1px 0 oklch(1 0 0 / 0.04) inset, 0 24px 60px -20px oklch(0 0 0 / 0.45)",
+          "0 1px 0 oklch(1 0 0 / 0.05) inset, 0 30px 80px -24px oklch(0 0 0 / 0.55)",
       }}
       aria-label="Exemplo de proposta indicativa"
     >
-      {/* Radar concentric circles, top-right */}
+      {/* Radar concentric circles — top-right */}
       <svg
         className="absolute inset-0 w-full h-full pointer-events-none"
         aria-hidden
       >
-        <defs>
-          <radialGradient id="radar-fade" cx="100%" cy="0%" r="100%">
-            <stop offset="0%" stopColor="white" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
-          </radialGradient>
-        </defs>
         <g
           stroke="white"
           fill="none"
-          strokeOpacity="0.06"
+          strokeOpacity="0.08"
           transform="translate(100%, 0%)"
         >
-          <circle r="80" />
-          <circle r="160" strokeDasharray="2 5" />
-          <circle r="240" strokeDasharray="2 5" />
-          <circle r="320" strokeDasharray="2 5" />
+          <circle r="60" strokeOpacity="0.10" />
+          <circle r="130" strokeDasharray="2 5" />
+          <circle r="200" strokeDasharray="2 5" strokeOpacity="0.06" />
+          <circle r="280" strokeDasharray="2 5" strokeOpacity="0.04" />
         </g>
       </svg>
 
       {/* Brand teal accent corner */}
       <div
         aria-hidden
-        className="absolute top-0 right-0 w-px h-24"
+        className="absolute top-0 right-0 w-px h-28"
         style={{
           background:
             "linear-gradient(180deg, var(--brand) 0%, transparent 100%)",
         }}
       />
+      <div
+        aria-hidden
+        className="absolute top-0 right-0 h-px w-20"
+        style={{
+          background:
+            "linear-gradient(270deg, var(--brand) 0%, transparent 100%)",
+        }}
+      />
 
-      <div className="relative p-6 sm:p-8 flex flex-col gap-6">
-        {/* Header */}
+      <div className="relative p-6 sm:p-8 flex flex-col gap-7">
+        {/* ── Header ─────────────────────────────────────────────── */}
         <div className="flex items-start justify-between">
-          <div className="space-y-1">
-            <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/45">
+          <div className="space-y-1.5">
+            <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/45">
               Proposta indicativa · Demo
             </p>
-            <p className="font-mono text-[11px] text-white/60 tabular-nums">
+            <p className="font-mono text-[11px] text-white/55 tabular-nums tracking-wider">
               PT-2026-0421
             </p>
           </div>
           <span
             className="inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-mono uppercase tracking-widest"
             style={{
-              background: "oklch(0.20 0.04 145 / 0.4)",
-              color: "oklch(0.85 0.14 145)",
-              border: "1px solid oklch(0.45 0.10 145 / 0.40)",
+              background: "color-mix(in oklab, var(--brand) 15%, transparent)",
+              color: "var(--brand)",
+              border: "1px solid color-mix(in oklab, var(--brand) 35%, transparent)",
             }}
           >
-            <span className="size-1 rounded-full bg-current" />
+            <span
+              className="size-1 rounded-full motion-safe:animate-pulse"
+              style={{ background: "var(--brand)" }}
+            />
             Indicativa
           </span>
         </div>
 
-        {/* Vehicle */}
-        <div className="flex items-end justify-between gap-4">
-          <div>
-            <h3
-              className="text-[26px] sm:text-[30px] font-bold leading-[1.05] tracking-[-0.02em] text-white"
-              style={{ fontWeight: 700 }}
-            >
-              Tesla Model 3
-            </h3>
-            <p className="mt-1 text-[13px] text-white/55">
-              Long Range · 2022 · 50 320 km
-            </p>
-          </div>
-          <span
-            className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/40 whitespace-nowrap"
+        {/* ── Vehicle title block ────────────────────────────────── */}
+        <div>
+          <h3
+            className="text-[28px] sm:text-[34px] font-bold leading-[1] tracking-[-0.025em] text-white"
+            style={{ fontWeight: 700 }}
           >
-            12-XX-AB
-          </span>
+            Tesla Model 3
+          </h3>
+          <div className="mt-2 flex items-center gap-3 text-[12px]">
+            <span className="text-white/55">Long Range · 2022</span>
+            <span className="size-1 rounded-full bg-white/20" />
+            {/* Portuguese plate-style chip */}
+            <PtPlate value="12-AB-34" />
+          </div>
         </div>
 
-        {/* EV silhouette */}
-        <div className="relative -mx-2 mt-2 mb-2 grid place-items-center">
+        {/* ── Vehicle silhouette — hero visual ───────────────────── */}
+        <div className="relative -mx-2 sm:-mx-4 mt-1 mb-1">
+          {/* Underglow */}
+          <div
+            aria-hidden
+            className="absolute inset-x-8 bottom-0 h-12 blur-2xl opacity-70"
+            style={{
+              background:
+                "radial-gradient(ellipse 60% 100% at 50% 100%, color-mix(in oklab, var(--brand) 60%, transparent), transparent)",
+            }}
+          />
+
           <svg
-            viewBox="0 0 320 100"
-            className="w-full max-w-[320px] h-auto opacity-90"
+            viewBox="0 0 400 130"
+            className="relative w-full h-auto"
             aria-hidden
           >
-            {/* Ground line */}
-            <line
-              x1="20"
-              y1="92"
-              x2="300"
-              y2="92"
-              stroke="white"
-              strokeOpacity="0.25"
-              strokeWidth="0.5"
-              strokeDasharray="2 4"
-            />
-            {/* Body */}
+            <defs>
+              <linearGradient id="bodyFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="white" stopOpacity="0.06" />
+                <stop offset="100%" stopColor="white" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="white" stopOpacity="0.10" />
+                <stop offset="100%" stopColor="white" stopOpacity="0.02" />
+              </linearGradient>
+              <radialGradient id="floorShadow" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stopColor="black" stopOpacity="0.55" />
+                <stop offset="100%" stopColor="black" stopOpacity="0" />
+              </radialGradient>
+            </defs>
+
+            {/* Ground shadow */}
+            <ellipse cx="210" cy="115" rx="160" ry="6" fill="url(#floorShadow)" />
+
+            {/* Body fill (subtle) */}
             <path
-              d="M 30 70
-                 Q 38 50 72 42
-                 L 110 38
-                 Q 130 26 165 23
-                 L 200 23
-                 Q 230 26 248 38
-                 L 282 42
-                 Q 302 50 305 70
-                 L 305 80
-                 L 30 80
-                 Z"
+              d="M 32 90
+                 Q 38 72 75 64
+                 L 112 58
+                 Q 138 36 180 30
+                 L 240 30
+                 Q 282 36 312 60
+                 L 350 64
+                 Q 378 72 385 92
+                 L 385 100
+                 L 32 100 Z"
+              fill="url(#bodyFill)"
+            />
+
+            {/* Body outline */}
+            <path
+              d="M 32 90
+                 Q 38 72 75 64
+                 L 112 58
+                 Q 138 36 180 30
+                 L 240 30
+                 Q 282 36 312 60
+                 L 350 64
+                 Q 378 72 385 92
+                 L 385 100
+                 L 32 100 Z"
               stroke="white"
-              strokeWidth="1.4"
+              strokeWidth="1.6"
               fill="none"
               strokeLinejoin="round"
             />
-            {/* Roof line */}
+
+            {/* Greenhouse / glass */}
             <path
-              d="M 96 42 Q 130 24 165 23 L 200 23 Q 232 26 252 42"
+              d="M 100 60
+                 Q 132 36 178 32
+                 L 240 32
+                 Q 282 36 308 60 Z"
+              fill="url(#glassFill)"
               stroke="white"
-              strokeOpacity="0.55"
-              strokeWidth="1"
-              fill="none"
+              strokeOpacity="0.45"
+              strokeWidth="1.1"
+              strokeLinejoin="round"
             />
-            {/* Door division */}
-            <line
-              x1="167"
-              y1="23"
-              x2="167"
-              y2="68"
-              stroke="white"
-              strokeOpacity="0.22"
-              strokeWidth="0.7"
-            />
-            {/* Front wheel */}
-            <circle cx="80" cy="80" r="14" stroke="white" strokeWidth="1.4" fill="oklch(0.06 0 0)" />
-            <circle cx="80" cy="80" r="6" stroke="white" strokeWidth="1.2" fill="none" />
-            {/* Rear wheel */}
-            <circle cx="255" cy="80" r="14" stroke="white" strokeWidth="1.4" fill="oklch(0.06 0 0)" />
-            <circle cx="255" cy="80" r="6" stroke="white" strokeWidth="1.2" fill="none" />
+
+            {/* B-pillar */}
+            <line x1="186" y1="32" x2="186" y2="60" stroke="white" strokeOpacity="0.30" strokeWidth="1" />
+            {/* Door cut */}
+            <line x1="186" y1="60" x2="186" y2="92" stroke="white" strokeOpacity="0.18" strokeWidth="0.8" />
+            {/* Belt line accent */}
+            <line x1="100" y1="60" x2="308" y2="60" stroke="white" strokeOpacity="0.12" strokeWidth="0.6" />
+
             {/* Headlight */}
-            <line x1="298" y1="64" x2="304" y2="64" stroke="white" strokeWidth="1.4" />
+            <path
+              d="M 376 76 Q 384 76 386 80 L 386 84 L 376 84 Z"
+              fill="white"
+              fillOpacity="0.85"
+            />
+            {/* Headlight glow */}
+            <ellipse cx="386" cy="80" rx="18" ry="4" fill="white" fillOpacity="0.10" />
+
+            {/* Taillight */}
+            <rect x="32" y="76" width="6" height="4" fill="oklch(0.65 0.22 27)" rx="1" />
+
+            {/* Wheels */}
+            <g>
+              {/* Front */}
+              <circle cx="312" cy="100" r="18" stroke="white" strokeWidth="1.5" fill="oklch(0.04 0 0)" />
+              <circle cx="312" cy="100" r="11" stroke="white" strokeOpacity="0.5" strokeWidth="0.8" fill="none" />
+              <circle cx="312" cy="100" r="5" fill="white" fillOpacity="0.8" />
+              {/* Rear */}
+              <circle cx="92" cy="100" r="18" stroke="white" strokeWidth="1.5" fill="oklch(0.04 0 0)" />
+              <circle cx="92" cy="100" r="11" stroke="white" strokeOpacity="0.5" strokeWidth="0.8" fill="none" />
+              <circle cx="92" cy="100" r="5" fill="white" fillOpacity="0.8" />
+            </g>
+
+            {/* Charge port indicator (small teal dot near rear wheel) */}
+            <circle cx="64" cy="80" r="1.5" fill="var(--brand)" />
           </svg>
         </div>
 
-        {/* Specs grid */}
-        <dl className="grid grid-cols-2 gap-x-6 gap-y-3 border-y border-white/[0.08] py-5">
-          <Row label="Quilómetros" value="50 320 km" />
-          <Row label="Autonomia real" value="450 km" />
-          <Row label="Donos anteriores" value="1" />
-          <RowSoH value={95} />
+        {/* ── SoH battery — hero metric ──────────────────────────── */}
+        <SoHBatteryRow value={95} />
+
+        {/* ── Other specs ────────────────────────────────────────── */}
+        <dl className="grid grid-cols-3 gap-x-4 border-y border-white/[0.08] py-4">
+          <SmallStat label="Quilómetros" value="50 320" suffix="km" />
+          <SmallStat label="Autonomia" value="450" suffix="km" />
+          <SmallStat label="Donos" value="1" suffix="" />
         </dl>
 
-        {/* Price + CTA */}
+        {/* ── Price + CTA ────────────────────────────────────────── */}
         <div className="flex items-end justify-between gap-4">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
+            <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/45">
               Valor indicativo
             </p>
-            <p
-              className="mt-1 font-bold tracking-[-0.025em] tabular-nums text-white"
-              style={{ fontSize: "clamp(2rem, 5vw, 2.75rem)", fontWeight: 700 }}
-            >
-              €&nbsp;18&nbsp;500
-            </p>
+            <div className="mt-1 flex items-baseline gap-2">
+              <span className="text-white/40 text-lg font-medium">€</span>
+              <span
+                className="font-bold tracking-[-0.035em] tabular-nums text-white leading-none"
+                style={{ fontSize: "clamp(2.25rem, 5.5vw, 3rem)", fontWeight: 700 }}
+              >
+                18&thinsp;500
+              </span>
+            </div>
           </div>
           <Link
             href="/avaliar"
-            className="group inline-flex items-center justify-center gap-1 rounded-full bg-white text-black h-10 px-5 text-[13px] font-medium tracking-tight transition-all hover:translate-y-[-1px] hover:shadow-[0_8px_20px_-6px_oklch(1_0_0_/_0.30)]"
+            className="group inline-flex items-center justify-center gap-1 rounded-full bg-white text-black h-11 px-5 text-[13px] font-semibold tracking-tight transition-all hover:translate-y-[-1px] hover:shadow-[0_10px_24px_-8px_oklch(1_0_0_/_0.30)]"
           >
             Avaliar o meu
-            <ArrowRight size={14} className="ml-0.5 transition-transform group-hover:translate-x-0.5" aria-hidden />
+            <ArrowRight
+              size={14}
+              className="ml-0.5 transition-transform group-hover:translate-x-0.5"
+              aria-hidden
+            />
           </Link>
         </div>
 
         {/* Caveat */}
-        <p className="font-mono text-[10px] leading-relaxed text-white/35">
-          Valor confirmado após inspeção presencial. Validade da proposta: 48&nbsp;h.
+        <p className="font-mono text-[10px] leading-relaxed text-white/35 -mt-2">
+          Confirmado após inspeção presencial · validade 48&nbsp;h
         </p>
       </div>
     </article>
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+/* ─── Mini PT plate chip ────────────────────────────────────────────────── */
+function PtPlate({ value }: { value: string }) {
   return (
-    <div className="space-y-1">
-      <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/40">
-        {label}
-      </dt>
-      <dd className="text-[13px] font-medium text-white/95 tabular-nums">
+    <span
+      className="inline-flex items-stretch overflow-hidden rounded-[3px] border border-white/15 text-[10px] font-mono"
+      aria-label={`Matrícula ${value}`}
+    >
+      <span
+        className="px-1 grid place-items-center text-[7px] font-bold text-white/85"
+        style={{ background: "oklch(0.30 0.18 260)" }}
+      >
+        P
+      </span>
+      <span className="px-1.5 py-0.5 bg-white/[0.04] text-white/85 tracking-[0.05em] tabular-nums">
         {value}
-      </dd>
+      </span>
+    </span>
+  );
+}
+
+/* ─── SoH segmented battery row (the hero metric) ───────────────────────── */
+function SoHBatteryRow({ value }: { value: number }) {
+  const segments = 12;
+  const filledSegments = Math.round((value / 100) * segments);
+  return (
+    <div>
+      <div className="flex items-baseline justify-between mb-2.5">
+        <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-white/45">
+          Bateria · SoH
+        </p>
+        <p className="font-mono text-[10px] text-white/40">
+          melhor do que 87% dos Model 3 desta idade
+        </p>
+      </div>
+      <div className="flex items-center gap-3">
+        <span
+          className="font-bold text-white tabular-nums leading-none"
+          style={{
+            fontFamily: "var(--font-mono)",
+            fontSize: "clamp(1.5rem, 3vw, 1.875rem)",
+            fontWeight: 600,
+          }}
+        >
+          {value}
+          <span className="text-white/45 text-base font-normal ml-0.5">%</span>
+        </span>
+        <div className="flex flex-1 gap-[3px]" aria-hidden>
+          {Array.from({ length: segments }).map((_, i) => (
+            <span
+              key={i}
+              className="flex-1 h-2.5 rounded-[1.5px] transition-opacity"
+              style={{
+                background:
+                  i < filledSegments
+                    ? "var(--brand)"
+                    : "oklch(1 0 0 / 0.06)",
+                opacity: i < filledSegments ? 1 - (filledSegments - i) * 0.04 : 1,
+                boxShadow:
+                  i < filledSegments
+                    ? "0 0 8px color-mix(in oklab, var(--brand) 30%, transparent)"
+                    : "none",
+              }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
 
-function RowSoH({ value }: { value: number }) {
+/* ─── Small stat row ────────────────────────────────────────────────────── */
+function SmallStat({
+  label,
+  value,
+  suffix,
+}: {
+  label: string;
+  value: string;
+  suffix: string;
+}) {
   return (
     <div className="space-y-1">
-      <dt className="font-mono text-[9px] uppercase tracking-[0.18em] text-white/40">
-        Bateria (SoH)
+      <dt className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/40">
+        {label}
       </dt>
-      <dd className="flex items-center gap-2">
-        <span className="text-[13px] font-medium text-white/95 tabular-nums shrink-0 w-9">
-          {value}%
-        </span>
-        <span
-          aria-hidden
-          className="relative h-1 flex-1 rounded-full bg-white/[0.08] overflow-hidden"
-        >
-          <span
-            className="absolute inset-y-0 left-0 rounded-full"
-            style={{
-              width: `${value}%`,
-              background: "var(--brand)",
-            }}
-          />
-        </span>
+      <dd className="text-[15px] font-semibold text-white/95 tabular-nums leading-none flex items-baseline gap-1">
+        {value}
+        {suffix && (
+          <span className="text-[11px] font-normal text-white/40">{suffix}</span>
+        )}
       </dd>
     </div>
   );
