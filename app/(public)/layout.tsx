@@ -13,25 +13,45 @@ export default function PublicLayout({
       <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 group" aria-label="compramososeueletrico — página inicial">
-            {/* Battery charge SVG motif */}
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 group"
+            aria-label="compramososeueletrico — página inicial"
+          >
+            {/* Battery mark — monochrome with single brand-teal cell */}
             <svg
-              width="24"
-              height="24"
+              width="22"
+              height="22"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               className="shrink-0"
               aria-hidden="true"
             >
-              <rect x="3" y="4" width="16" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" className="text-primary" />
-              <rect x="19" y="9" width="2" height="5" rx="1" fill="currentColor" className="text-primary" />
-              <rect x="5" y="6" width="6" height="10" rx="1" fill="currentColor" className="text-primary" />
+              <rect
+                x="3"
+                y="4"
+                width="16"
+                height="14"
+                rx="1.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                className="text-foreground"
+              />
+              <rect
+                x="19"
+                y="9"
+                width="2"
+                height="5"
+                rx="0.5"
+                fill="currentColor"
+                className="text-foreground"
+              />
+              {/* Single charge cell — the lone brand accent */}
+              <rect x="5" y="6" width="6" height="10" rx="0.5" fill="var(--brand)" />
             </svg>
-            <span className="font-semibold text-sm tracking-tight leading-none">
-              <span className="text-primary">compramos</span>
-              <span className="text-foreground">o seu</span>
-              <span className="text-primary">elétrico</span>
+            <span className="font-semibold text-[13px] tracking-tight leading-none text-foreground">
+              compramososeueletrico
             </span>
           </Link>
 
@@ -46,28 +66,47 @@ export default function PublicLayout({
       <main className="flex-1">{children}</main>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-muted/40">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8">
+      <footer className="border-t border-border bg-muted/30">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             {/* Brand + legal info */}
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
                 <svg
-                  width="16"
-                  height="16"
+                  width="14"
+                  height="14"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  className="shrink-0 text-primary"
+                  className="shrink-0"
                   aria-hidden="true"
                 >
-                  <rect x="3" y="4" width="16" height="14" rx="2" stroke="currentColor" strokeWidth="1.5" />
-                  <rect x="19" y="9" width="2" height="5" rx="1" fill="currentColor" />
-                  <rect x="5" y="6" width="6" height="10" rx="1" fill="currentColor" />
+                  <rect
+                    x="3"
+                    y="4"
+                    width="16"
+                    height="14"
+                    rx="1.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    className="text-foreground"
+                  />
+                  <rect
+                    x="19"
+                    y="9"
+                    width="2"
+                    height="5"
+                    rx="0.5"
+                    fill="currentColor"
+                    className="text-foreground"
+                  />
+                  <rect x="5" y="6" width="6" height="10" rx="0.5" fill="var(--brand)" />
                 </svg>
-                <span className="text-sm font-medium text-foreground">compramososeueletrico</span>
+                <span className="text-[13px] font-medium text-foreground">
+                  compramososeueletrico
+                </span>
               </div>
-              <p className="text-xs text-muted-foreground font-mono">
+              <p className="text-[11px] text-muted-foreground font-mono tracking-wide">
                 NIF 999 999 999 · Rua Exemplo 123, 1000-000 Lisboa
               </p>
             </div>

@@ -37,20 +37,19 @@ export default function LandingPage() {
         style={{
           minHeight: "calc(100svh - 56px)",
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.32 0.08 185 / 0.55), transparent 70%)," +
-            "radial-gradient(ellipse 60% 40% at 50% 0%, oklch(0.20 0.04 220 / 0.6), transparent 70%)," +
-            "linear-gradient(180deg, oklch(0.10 0.012 220) 0%, oklch(0.07 0.010 220) 100%)",
+            "radial-gradient(ellipse 80% 60% at 50% 100%, oklch(0.20 0.05 185 / 0.50), transparent 70%)," +
+            "linear-gradient(180deg, oklch(0.06 0 0) 0%, oklch(0.03 0 0) 100%)",
         }}
       >
-        {/* Animated aurora layer */}
+        {/* Animated aurora layer — single brand teal whisper */}
         <div
           aria-hidden
           className="absolute inset-0 -z-10 motion-safe:animate-[aurora_22s_ease-in-out_infinite] opacity-70"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 20% 50%, oklch(0.48 0.13 185 / 0.18), transparent 35%)," +
-              "radial-gradient(circle at 80% 30%, oklch(0.55 0.10 200 / 0.15), transparent 40%)," +
-              "radial-gradient(circle at 50% 90%, oklch(0.62 0.14 185 / 0.12), transparent 40%)",
+              "radial-gradient(circle at 20% 50%, oklch(0.55 0.10 185 / 0.16), transparent 38%)," +
+              "radial-gradient(circle at 80% 30%, oklch(0.65 0.10 200 / 0.10), transparent 42%)," +
+              "radial-gradient(circle at 50% 95%, oklch(0.70 0.12 185 / 0.10), transparent 42%)",
           }}
         />
 
@@ -70,7 +69,7 @@ export default function LandingPage() {
             <div
               aria-hidden
               className="h-px w-8"
-              style={{ background: "oklch(0.65 0.14 185 / 0.55)" }}
+              style={{ background: "color-mix(in oklab, var(--brand) 55%, transparent)" }}
             />
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/55">
               Compramos o teu elétrico · Portugal
@@ -92,7 +91,7 @@ export default function LandingPage() {
                 Vendido em{" "}
                 <span
                   className="italic font-light tracking-tight"
-                  style={{ color: "oklch(0.72 0.14 185)" }}
+                  style={{ color: "var(--brand)" }}
                 >
                   24&nbsp;h
                 </span>
@@ -193,13 +192,12 @@ export default function LandingPage() {
                   <div
                     aria-hidden
                     className="absolute left-0 top-0 h-px w-12 transition-all duration-700 group-hover:w-full"
-                    style={{ background: "oklch(0.48 0.13 185)" }}
+                    style={{ background: "var(--foreground)" }}
                   />
                 </div>
                 <div className="mt-5 flex items-baseline justify-between">
                   <span
-                    className="font-mono text-xs tracking-[0.18em] uppercase"
-                    style={{ color: "oklch(0.48 0.13 185)" }}
+                    className="font-mono text-[10px] tracking-[0.20em] uppercase text-muted-foreground"
                   >
                     Passo {step.n}
                   </span>
@@ -227,7 +225,7 @@ export default function LandingPage() {
         className="relative isolate overflow-hidden text-white"
         style={{
           background:
-            "linear-gradient(180deg, oklch(0.10 0.012 220) 0%, oklch(0.08 0.010 220) 100%)",
+            "linear-gradient(180deg, oklch(0.06 0 0) 0%, oklch(0.04 0 0) 100%)",
         }}
       >
         {/* Subtle teal halo bottom-right */}
@@ -236,7 +234,7 @@ export default function LandingPage() {
           className="absolute inset-0 -z-10 opacity-60"
           style={{
             background:
-              "radial-gradient(circle at 90% 100%, oklch(0.48 0.13 185 / 0.20), transparent 50%)",
+              "radial-gradient(circle at 90% 100%, color-mix(in oklab, var(--brand) 22%, transparent), transparent 50%)",
           }}
         />
 
@@ -253,7 +251,7 @@ export default function LandingPage() {
                   fontSize: "clamp(5rem, 18vw, 14rem)",
                   fontWeight: 900,
                   background:
-                    "linear-gradient(180deg, oklch(0.95 0.04 185) 0%, oklch(0.55 0.13 185) 100%)",
+                    "linear-gradient(180deg, oklch(0.98 0 0) 0%, oklch(0.55 0.10 185) 100%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                   backgroundClip: "text",
@@ -294,7 +292,7 @@ export default function LandingPage() {
                     <span
                       aria-hidden
                       className="size-1.5 rounded-full shrink-0 translate-y-2 transition-transform group-hover:scale-150"
-                      style={{ background: "oklch(0.65 0.14 185)" }}
+                      style={{ background: "var(--brand)" }}
                     />
                     <div className="space-y-1.5">
                       <h3 className="text-base sm:text-lg font-semibold tracking-tight text-white">
@@ -350,7 +348,7 @@ export default function LandingPage() {
                 <span
                   aria-hidden
                   className="absolute inset-x-0 bottom-0 h-px scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"
-                  style={{ background: "oklch(0.48 0.13 185)" }}
+                  style={{ background: "var(--foreground)" }}
                 />
               </li>
             ))}
@@ -390,8 +388,8 @@ export default function LandingPage() {
         className="relative isolate overflow-hidden text-white"
         style={{
           background:
-            "radial-gradient(ellipse 80% 60% at 50% 50%, oklch(0.30 0.06 185 / 0.45), transparent 70%)," +
-            "linear-gradient(180deg, oklch(0.07 0.010 220) 0%, oklch(0.05 0.008 220) 100%)",
+            "radial-gradient(ellipse 80% 60% at 50% 50%, color-mix(in oklab, var(--brand) 35%, transparent), transparent 70%)," +
+            "linear-gradient(180deg, oklch(0.04 0 0) 0%, oklch(0.02 0 0) 100%)",
         }}
       >
         <div className="mx-auto max-w-4xl px-4 sm:px-6 py-32 sm:py-40 text-center">
@@ -404,7 +402,7 @@ export default function LandingPage() {
             style={{ fontSize: "clamp(2.5rem, 8vw, 6rem)", fontWeight: 900 }}
           >
             Começa pela{" "}
-            <span style={{ color: "oklch(0.72 0.14 185)" }}>matrícula</span>.
+            <span style={{ color: "var(--brand)" }}>matrícula</span>.
           </h2>
           <p className="mt-6 mx-auto max-w-md text-white/60 text-base leading-relaxed">
             Menos de um minuto. Recebes a proposta no telemóvel.

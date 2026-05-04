@@ -1,19 +1,22 @@
 import type { Metadata } from "next";
-import { DM_Sans, DM_Mono } from "next/font/google";
+import { Manrope, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const dmSans = DM_Sans({
+// Manrope: distinctive geometric sans, beautiful at display weights.
+// Variable axis 200..800 covers everything from labels to the 800-weight hero headlines.
+const manrope = Manrope({
   variable: "--font-sans",
   subsets: ["latin"],
-  axes: ["opsz"],
   display: "swap",
 });
 
-const dmMono = DM_Mono({
+// JetBrains Mono: technical / engineering character without the
+// "developer joke" feel of Fira Code or the genericness of system mono.
+const jetbrainsMono = JetBrains_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -40,7 +43,7 @@ export default function RootLayout({
   return (
     <html
       lang="pt-PT"
-      className={`${dmSans.variable} ${dmMono.variable} h-full antialiased`}
+      className={`${manrope.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         {children}

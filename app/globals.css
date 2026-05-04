@@ -1,14 +1,15 @@
 /*
  * compramososeueletrico — Design Token System
  *
- * Brand: "Precision Verde" — technical warmth for Portuguese EV buyers.
- * Primary: Deep teal-green (oklch 0.48 0.13 185) — electric energy, trust, sustainability.
- * Accent: Warm amber (oklch 0.75 0.16 75) — Portuguese warmth, CTA highlights.
- * Secondary: Cool slate surface — clean, modern, readable.
- * Typeface: DM Sans (geometric, warm, approachable) + DM Mono (technical).
- * Radius: 0.75rem base — modern without being bubbly.
- * Shadows: Subtle teal-tinted elevations, not generic greys.
- * WCAG AA maintained: all text/bg pairs ≥ 4.5:1 in both light and dark.
+ * Brand: "Tesla-clean" — neutral monochrome with rare brand accent.
+ * Dominant: pure white / pure black (no warm undertone).
+ * Chrome: pure neutral grays (no chroma in core surfaces).
+ * Brand teal (`--brand`): preserved ONLY for atmospheric / signature moments
+ *   (logo battery mark, hero "24 h" italic, hero aurora glow). Never on chrome.
+ * Destructive: Tesla-style red (alarms, RGPD, errors).
+ * Typeface: Manrope (display + body) + JetBrains Mono (technical labels).
+ * Radius: 0.5rem base — tight, modern, not bubbly.
+ * WCAG AA: all text/bg pairs ≥ 4.5:1 in both light and dark.
  */
 
 @import "tailwindcss";
@@ -20,6 +21,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-heading: var(--font-sans);
@@ -62,125 +64,129 @@
 }
 
 :root {
-  /* Warm off-white background — avoids clinical coldness */
-  --background: oklch(0.99 0.004 90);
-  /* Near-black with warm undertone */
-  --foreground: oklch(0.14 0.012 260);
+  /* Pure white — clinical, refined, Tesla-clean */
+  --background: oklch(1 0 0);
+  /* Near-black with imperceptible cool undertone */
+  --foreground: oklch(0.14 0.002 240);
 
-  /* Cards slightly elevated from background */
+  /* Cards same as background — flat, no surface differentiation by default */
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.14 0.012 260);
+  --card-foreground: oklch(0.14 0.002 240);
 
   /* Popovers clean white */
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.14 0.012 260);
+  --popover-foreground: oklch(0.14 0.002 240);
 
-  /* Primary: deep teal-green — electric, trustworthy, unmistakably EV */
-  /* oklch(0.48 0.13 185) ≈ #0d7066 — contrast on white: ~6.2:1 ✓ AA */
-  --primary: oklch(0.48 0.13 185);
-  --primary-foreground: oklch(0.98 0.005 185);
+  /* Primary: near-black for buttons / focus / interaction.
+     Inverted from "brand color CTA" → Tesla style: black button on white. */
+  --primary: oklch(0.14 0.002 240);
+  --primary-foreground: oklch(1 0 0);
 
-  /* Secondary: cool slate — clean supporting surface */
-  --secondary: oklch(0.95 0.006 240);
-  --secondary-foreground: oklch(0.25 0.015 260);
+  /* Secondary: light gray surface — subtle differentiation when needed */
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.14 0.002 240);
 
-  /* Muted: very light warm grey */
-  --muted: oklch(0.96 0.004 90);
-  --muted-foreground: oklch(0.50 0.010 260);
+  /* Muted: very light gray surface */
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.45 0.002 240);
 
-  /* Accent: warm amber — Portuguese warmth, CTA energy */
-  /* oklch(0.75 0.16 75) ≈ #e8a020 — used on surfaces, not as bg for small text */
-  --accent: oklch(0.94 0.04 90);
-  --accent-foreground: oklch(0.32 0.06 75);
+  /* Accent: subtle gray — used for hover states, light backgrounds */
+  --accent: oklch(0.95 0 0);
+  --accent-foreground: oklch(0.14 0.002 240);
 
-  /* Destructive: vivid red */
-  --destructive: oklch(0.577 0.245 27.325);
+  /* Destructive: Tesla-style red ≈ #E31937 */
+  --destructive: oklch(0.55 0.22 27);
 
-  /* Borders: subtle teal-tinted grey */
-  --border: oklch(0.90 0.008 185);
-  --input: oklch(0.90 0.008 185);
+  /* Borders: cool light gray */
+  --border: oklch(0.92 0.002 240);
+  --input: oklch(0.92 0.002 240);
 
-  /* Ring: primary teal for focus states */
-  --ring: oklch(0.48 0.13 185);
+  /* Ring: black focus indicator — clear, intentional */
+  --ring: oklch(0.14 0.002 240);
 
-  /* Charts: teal spectrum + amber accent */
-  --chart-1: oklch(0.48 0.13 185);
-  --chart-2: oklch(0.62 0.10 185);
-  --chart-3: oklch(0.75 0.16 75);
-  --chart-4: oklch(0.58 0.12 210);
-  --chart-5: oklch(0.40 0.09 185);
+  /* BRAND: rare-use accent. Only for signature atmospheric moments. */
+  --brand: oklch(0.55 0.10 185);
 
-  /* Radius: 0.75rem — modern, not bubbly */
-  --radius: 0.75rem;
+  /* Charts: monochrome scale + brand accent for primary series */
+  --chart-1: oklch(0.14 0.002 240);
+  --chart-2: oklch(0.40 0.002 240);
+  --chart-3: oklch(0.60 0.002 240);
+  --chart-4: oklch(0.78 0.002 240);
+  --chart-5: oklch(0.55 0.10 185);
 
-  /* Sidebar */
-  --sidebar: oklch(0.97 0.005 185);
-  --sidebar-foreground: oklch(0.14 0.012 260);
-  --sidebar-primary: oklch(0.48 0.13 185);
-  --sidebar-primary-foreground: oklch(0.98 0.005 185);
-  --sidebar-accent: oklch(0.94 0.04 90);
-  --sidebar-accent-foreground: oklch(0.32 0.06 75);
-  --sidebar-border: oklch(0.90 0.008 185);
-  --sidebar-ring: oklch(0.48 0.13 185);
+  /* Radius: 0.5rem — tight, modern */
+  --radius: 0.5rem;
+
+  /* Sidebar — same monochrome system */
+  --sidebar: oklch(0.98 0 0);
+  --sidebar-foreground: oklch(0.14 0.002 240);
+  --sidebar-primary: oklch(0.14 0.002 240);
+  --sidebar-primary-foreground: oklch(1 0 0);
+  --sidebar-accent: oklch(0.95 0 0);
+  --sidebar-accent-foreground: oklch(0.14 0.002 240);
+  --sidebar-border: oklch(0.92 0.002 240);
+  --sidebar-ring: oklch(0.14 0.002 240);
 }
 
 .dark {
-  /* Deep warm-tinted near-black — not pure #000 */
-  --background: oklch(0.13 0.012 220);
-  /* Off-white foreground — warm, readable */
-  --foreground: oklch(0.95 0.006 90);
+  /* Pure-black-ish. Slight chroma to avoid green-cast on OLED */
+  --background: oklch(0.06 0.002 240);
+  /* Pure white foreground */
+  --foreground: oklch(0.98 0 0);
 
-  /* Cards: slightly elevated surface */
-  --card: oklch(0.18 0.012 220);
-  --card-foreground: oklch(0.95 0.006 90);
+  /* Cards: tiny elevation step */
+  --card: oklch(0.10 0.002 240);
+  --card-foreground: oklch(0.98 0 0);
 
   /* Popovers */
-  --popover: oklch(0.18 0.012 220);
-  --popover-foreground: oklch(0.95 0.006 90);
+  --popover: oklch(0.10 0.002 240);
+  --popover-foreground: oklch(0.98 0 0);
 
-  /* Primary: brighter teal in dark mode for legibility */
-  /* oklch(0.65 0.14 185) on dark bg ~8:1 ✓ AA */
-  --primary: oklch(0.65 0.14 185);
-  --primary-foreground: oklch(0.10 0.020 220);
+  /* Primary: white in dark mode — inverted Tesla button */
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.06 0.002 240);
 
-  /* Secondary: dark slate surface */
-  --secondary: oklch(0.22 0.012 220);
-  --secondary-foreground: oklch(0.90 0.008 90);
+  /* Secondary: dark gray surface */
+  --secondary: oklch(0.18 0.002 240);
+  --secondary-foreground: oklch(0.98 0 0);
 
-  /* Muted: subtle dark surface */
-  --muted: oklch(0.22 0.012 220);
-  --muted-foreground: oklch(0.62 0.010 220);
+  /* Muted: dark surface */
+  --muted: oklch(0.18 0.002 240);
+  --muted-foreground: oklch(0.65 0.002 240);
 
-  /* Accent: amber glow in dark mode */
-  --accent: oklch(0.28 0.018 75);
-  --accent-foreground: oklch(0.85 0.12 75);
+  /* Accent: subtle dark gray */
+  --accent: oklch(0.20 0.002 240);
+  --accent-foreground: oklch(0.98 0 0);
 
-  /* Destructive: softer red for dark */
-  --destructive: oklch(0.704 0.191 22.216);
+  /* Destructive: brighter red for dark */
+  --destructive: oklch(0.65 0.22 27);
 
-  /* Borders: teal-tinted semi-transparent */
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
+  /* Borders: barely visible */
+  --border: oklch(1 0 0 / 0.10);
+  --input: oklch(1 0 0 / 0.15);
 
-  /* Ring: bright teal */
-  --ring: oklch(0.65 0.14 185);
+  /* Ring: white focus indicator */
+  --ring: oklch(0.98 0 0);
 
-  /* Charts: adapted teal/amber for dark */
-  --chart-1: oklch(0.65 0.14 185);
-  --chart-2: oklch(0.75 0.10 185);
-  --chart-3: oklch(0.78 0.16 75);
-  --chart-4: oklch(0.60 0.12 210);
-  --chart-5: oklch(0.50 0.10 185);
+  /* BRAND: brighter teal for dark mode atmosphere */
+  --brand: oklch(0.72 0.12 185);
+
+  /* Charts: monochrome scale + brand accent for primary series */
+  --chart-1: oklch(0.98 0 0);
+  --chart-2: oklch(0.78 0.002 240);
+  --chart-3: oklch(0.58 0.002 240);
+  --chart-4: oklch(0.38 0.002 240);
+  --chart-5: oklch(0.72 0.12 185);
 
   /* Sidebar dark */
-  --sidebar: oklch(0.18 0.012 220);
-  --sidebar-foreground: oklch(0.95 0.006 90);
-  --sidebar-primary: oklch(0.65 0.14 185);
-  --sidebar-primary-foreground: oklch(0.10 0.020 220);
-  --sidebar-accent: oklch(0.28 0.018 75);
-  --sidebar-accent-foreground: oklch(0.85 0.12 75);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.65 0.14 185);
+  --sidebar: oklch(0.10 0.002 240);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.98 0 0);
+  --sidebar-primary-foreground: oklch(0.06 0.002 240);
+  --sidebar-accent: oklch(0.20 0.002 240);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(1 0 0 / 0.10);
+  --sidebar-ring: oklch(0.98 0 0);
 }
 
 @layer base {
@@ -189,9 +195,21 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
   }
   html {
     @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  /* Tighter tracking on big display headlines (≥ 2rem) */
+  h1, h2 {
+    letter-spacing: -0.025em;
+  }
+  /* Selection: brand-tinted, not browser default blue */
+  ::selection {
+    background: var(--brand);
+    color: var(--background);
   }
 }
 
