@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   ArrowRight,
   Check,
@@ -10,6 +11,18 @@ import {
   Gauge,
 } from "lucide-react";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Demo proposal preview image.
+   - Default: a stable Unsplash Tesla Model 3 photo (free commercial license).
+   - To swap with your own asset:
+     1. drop your image at `public/proposal-preview.png`
+     2. change PROPOSAL_PREVIEW_IMG below to "/proposal-preview.png"
+   - Works with both relative (Next/Image-optimized) and remote URLs
+     (configured in next.config.ts → images.remotePatterns)
+   ────────────────────────────────────────────────────────────────────────── */
+const PROPOSAL_PREVIEW_IMG =
+  "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=85";
 
 /* ──────────────────────────────────────────────────────────────────────────
    Landing — "Card-stack SaaS" direction
@@ -500,121 +513,60 @@ function ProposalPreviewCard() {
           </div>
         </div>
 
-        {/* ── Vehicle silhouette — hero visual ───────────────────── */}
-        <div className="relative -mx-2 sm:-mx-4 mt-1 mb-1">
-          {/* Underglow */}
+        {/* ── Vehicle photo — hero visual ────────────────────────── */}
+        <div className="relative -mx-2 sm:-mx-4 mt-1 mb-1 aspect-[16/9]">
+          {/* Underglow — brand teal halo behind the car */}
           <div
             aria-hidden
-            className="absolute inset-x-8 bottom-0 h-12 blur-2xl opacity-70"
+            className="absolute inset-x-12 bottom-2 h-16 blur-2xl opacity-60"
             style={{
               background:
-                "radial-gradient(ellipse 60% 100% at 50% 100%, color-mix(in oklab, var(--brand) 60%, transparent), transparent)",
+                "radial-gradient(ellipse 60% 100% at 50% 100%, color-mix(in oklab, var(--brand) 70%, transparent), transparent)",
             }}
           />
 
-          <svg
-            viewBox="0 0 400 130"
-            className="relative w-full h-auto"
+          {/* Photo */}
+          <div className="relative w-full h-full overflow-hidden rounded-2xl">
+            <Image
+              src={PROPOSAL_PREVIEW_IMG}
+              alt="Tesla Model 3 — exemplo ilustrativo"
+              fill
+              sizes="(min-width: 1024px) 480px, 100vw"
+              className="object-cover object-center"
+              priority
+              style={{
+                filter: "brightness(0.95) contrast(1.05) saturate(0.92)",
+              }}
+            />
+            {/* Top vignette to integrate with the dark card top */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(180deg, oklch(0.06 0.005 230) 0%, transparent 18%, transparent 80%, oklch(0.06 0.005 230 / 0.55) 100%)",
+              }}
+            />
+            {/* Side fade for blending */}
+            <div
+              aria-hidden
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(90deg, oklch(0.08 0.005 230 / 0.35) 0%, transparent 12%, transparent 88%, oklch(0.08 0.005 230 / 0.35) 100%)",
+              }}
+            />
+          </div>
+
+          {/* Reflection floor */}
+          <div
             aria-hidden
-          >
-            <defs>
-              <linearGradient id="bodyFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="white" stopOpacity="0.06" />
-                <stop offset="100%" stopColor="white" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient id="glassFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="white" stopOpacity="0.10" />
-                <stop offset="100%" stopColor="white" stopOpacity="0.02" />
-              </linearGradient>
-              <radialGradient id="floorShadow" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor="black" stopOpacity="0.55" />
-                <stop offset="100%" stopColor="black" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-
-            {/* Ground shadow */}
-            <ellipse cx="210" cy="115" rx="160" ry="6" fill="url(#floorShadow)" />
-
-            {/* Body fill (subtle) */}
-            <path
-              d="M 32 90
-                 Q 38 72 75 64
-                 L 112 58
-                 Q 138 36 180 30
-                 L 240 30
-                 Q 282 36 312 60
-                 L 350 64
-                 Q 378 72 385 92
-                 L 385 100
-                 L 32 100 Z"
-              fill="url(#bodyFill)"
-            />
-
-            {/* Body outline */}
-            <path
-              d="M 32 90
-                 Q 38 72 75 64
-                 L 112 58
-                 Q 138 36 180 30
-                 L 240 30
-                 Q 282 36 312 60
-                 L 350 64
-                 Q 378 72 385 92
-                 L 385 100
-                 L 32 100 Z"
-              stroke="white"
-              strokeWidth="1.6"
-              fill="none"
-              strokeLinejoin="round"
-            />
-
-            {/* Greenhouse / glass */}
-            <path
-              d="M 100 60
-                 Q 132 36 178 32
-                 L 240 32
-                 Q 282 36 308 60 Z"
-              fill="url(#glassFill)"
-              stroke="white"
-              strokeOpacity="0.45"
-              strokeWidth="1.1"
-              strokeLinejoin="round"
-            />
-
-            {/* B-pillar */}
-            <line x1="186" y1="32" x2="186" y2="60" stroke="white" strokeOpacity="0.30" strokeWidth="1" />
-            {/* Door cut */}
-            <line x1="186" y1="60" x2="186" y2="92" stroke="white" strokeOpacity="0.18" strokeWidth="0.8" />
-            {/* Belt line accent */}
-            <line x1="100" y1="60" x2="308" y2="60" stroke="white" strokeOpacity="0.12" strokeWidth="0.6" />
-
-            {/* Headlight */}
-            <path
-              d="M 376 76 Q 384 76 386 80 L 386 84 L 376 84 Z"
-              fill="white"
-              fillOpacity="0.85"
-            />
-            {/* Headlight glow */}
-            <ellipse cx="386" cy="80" rx="18" ry="4" fill="white" fillOpacity="0.10" />
-
-            {/* Taillight */}
-            <rect x="32" y="76" width="6" height="4" fill="oklch(0.65 0.22 27)" rx="1" />
-
-            {/* Wheels */}
-            <g>
-              {/* Front */}
-              <circle cx="312" cy="100" r="18" stroke="white" strokeWidth="1.5" fill="oklch(0.04 0 0)" />
-              <circle cx="312" cy="100" r="11" stroke="white" strokeOpacity="0.5" strokeWidth="0.8" fill="none" />
-              <circle cx="312" cy="100" r="5" fill="white" fillOpacity="0.8" />
-              {/* Rear */}
-              <circle cx="92" cy="100" r="18" stroke="white" strokeWidth="1.5" fill="oklch(0.04 0 0)" />
-              <circle cx="92" cy="100" r="11" stroke="white" strokeOpacity="0.5" strokeWidth="0.8" fill="none" />
-              <circle cx="92" cy="100" r="5" fill="white" fillOpacity="0.8" />
-            </g>
-
-            {/* Charge port indicator (small teal dot near rear wheel) */}
-            <circle cx="64" cy="80" r="1.5" fill="var(--brand)" />
-          </svg>
+            className="absolute inset-x-6 -bottom-1 h-2 blur-md opacity-40"
+            style={{
+              background:
+                "linear-gradient(180deg, oklch(1 0 0 / 0.10) 0%, transparent 100%)",
+            }}
+          />
         </div>
 
         {/* ── SoH battery — hero metric ──────────────────────────── */}

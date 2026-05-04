@@ -19,7 +19,7 @@ const cspParts = [
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://app.cal.com https://*.supabase.co",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
   "font-src 'self' https://fonts.gstatic.com data:",
-  "img-src 'self' data: blob: https://app.cal.com https://*.supabase.co",
+  "img-src 'self' data: blob: https://app.cal.com https://*.supabase.co https://images.unsplash.com",
   "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.resend.com https://api.twilio.com https://app.cal.com https://api.cal.com",
   "frame-src 'self' https://app.cal.com",
   "frame-ancestors 'self'",
@@ -28,6 +28,14 @@ const cspParts = [
 ];
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+    ],
+  },
   async headers() {
     return [
       {
