@@ -112,14 +112,14 @@ export default function LandingPage() {
                   className="italic font-light tracking-[-0.02em]"
                   style={{ color: "var(--brand)" }}
                 >
-                  24&nbsp;h
+                  48&nbsp;h
                 </span>
                 .
               </h1>
 
               <p className="mt-6 max-w-md text-[15px] sm:text-base leading-relaxed text-muted-foreground">
                 Avaliação online em 1 minuto. Proposta firme por SMS em poucas
-                horas. Pagamento no próprio dia da inspeção.
+                horas. Pagamento nas 48 h seguintes à inspeção.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row gap-3">
@@ -137,7 +137,7 @@ export default function LandingPage() {
                 {[
                   ["100%", "Só elétricos"],
                   ["<1h", "Para a proposta"],
-                  ["24h", "Para o pagamento"],
+                  ["48h", "Para o pagamento"],
                 ].map(([k, v]) => (
                   <div key={k as string}>
                     <dt
@@ -224,7 +224,7 @@ export default function LandingPage() {
                 n: "03",
                 Icon: Wallet,
                 title: "Recebes o dinheiro",
-                body: "Inspeção presencial e fechamos no próprio dia, com pagamento por transferência imediata.",
+                body: "Inspeção presencial com teste de bateria. Pagamento por transferência nas 48 h seguintes — assim que o teste estiver concluído.",
               },
             ].map((step) => (
               <article
