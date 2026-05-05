@@ -21,12 +21,7 @@ const faqs = [
   {
     question: "Onde ficam? Tenho de levar o carro?",
     answer:
-      "Não precisas de se deslocar. Fazemos nós a recolha do veículo em morada à tua escolha — seja em casa, no trabalho ou noutro local conveniente. Cobrimos todo o território continental.",
-  },
-  {
-    question: "E se mudar de ideias depois de aceitar?",
-    answer:
-      "Tens 24 horas após aceitar a proposta para recusar sem qualquer custo ou penalização. A partir do momento em que a recolha é agendada e confirmada, o negócio considera-se feito.",
+      "Estamos na zona da Trofa, Porto. Não precisas de te deslocar — fazemos nós a recolha do veículo em morada à tua escolha, seja em casa, no trabalho ou noutro local conveniente.",
   },
   {
     question: "Quem são vocês?",
