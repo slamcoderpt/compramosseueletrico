@@ -224,7 +224,7 @@ export default function LandingPage() {
                 n: "03",
                 Icon: Wallet,
                 title: "Recebes o dinheiro",
-                body: "Inspeção presencial com teste de bateria. Pagamento por transferência nas 48 h seguintes — assim que o teste estiver concluído.",
+                body: "Recolha no Norte e Centro. Inspeção com leitura ao BMS. Pagamento por transferência nas 48 h seguintes ao teste.",
               },
             ].map((step) => (
               <article
@@ -296,7 +296,7 @@ export default function LandingPage() {
                 {
                   Icon: BatteryFull,
                   title: "Bateria a sério",
-                  body: "Avaliamos a degradação real (SoH) — o fator que mais pesa no valor.",
+                  body: "Lemos diretamente o sistema de gestão da bateria (BMS). SoH real, não estimado — o fator que mais pesa no valor.",
                 },
                 {
                   Icon: Gauge,
@@ -390,6 +390,20 @@ export default function LandingPage() {
                 );
               })}
             </ul>
+          </div>
+
+          {/* "Compramos com problemas" callout */}
+          <div className="mt-4 rounded-2xl border border-border/60 bg-card px-5 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3"
+            style={{ boxShadow: "var(--shadow-card)" }}
+          >
+            <p className="text-sm text-foreground/80 leading-relaxed">
+              <span className="font-semibold text-foreground">Carro com problemas?</span>{" "}
+              Avaliamos na mesma — bateria degradada, danos ou avaria. O estado reflete-se no preço, nunca numa recusa.
+            </p>
+            <PillButton href="/avaliar" variant="ghost">
+              Avaliar assim mesmo
+              <ArrowRight size={14} className="ml-1" aria-hidden />
+            </PillButton>
           </div>
         </div>
       </section>
