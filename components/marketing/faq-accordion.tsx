@@ -11,7 +11,7 @@ const faqs = [
   {
     question: "A proposta que recebo é firme?",
     answer:
-      "Sim. Quando te enviamos uma proposta por SMS, ela é válida por 48 horas e não muda. Não há negociação à última hora nem surpresas na entrega. O valor que vês é o que recebes.",
+      "A proposta é baseada nos dados que nos forneceste e tem validade de 48 horas. É firme — desde que o estado do veículo na inspeção corresponda ao que descreveste. Se a inspeção revelar diferenças significativas (danos não declarados, saúde da bateria muito inferior, etc.), ajustamos o valor antes de fecharmos o negócio. O que não fazemos é renegociar à última hora sem razão: se o carro está como disseste, o valor não muda.",
   },
   {
     question: "Quanto tempo demora todo o processo?",
