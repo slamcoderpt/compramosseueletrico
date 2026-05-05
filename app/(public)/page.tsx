@@ -47,6 +47,40 @@ const MODELS = [
   "Polestar 2",
 ];
 
+/* ──────────────────────────────────────────────────────────────────────────
+   Testimonials — replace with real seller quotes when available.
+   ────────────────────────────────────────────────────────────────────────── */
+const TESTIMONIALS = [
+  {
+    name: "João M.",
+    car: "Tesla Model 3 · Lisboa",
+    quote:
+      "Recebi proposta em menos de 3 horas. Preço justo, tudo tratado sem dores de cabeça. Recomendo a qualquer proprietário de elétrico.",
+  },
+  {
+    name: "Sara F.",
+    car: "Nissan Leaf · Porto",
+    quote:
+      "Fiz a avaliação num minuto e o dinheiro entrou na conta no dia seguinte. Simples, rápido, sem negociações infinitas.",
+  },
+  {
+    name: "Rui P.",
+    car: "VW ID.3 · Coimbra",
+    quote:
+      "Outros compradores perdiam-me em negociações. Aqui fui tratado com seriedade: proposta firme logo de início, sem surpresas.",
+  },
+];
+
+/* ──────────────────────────────────────────────────────────────────────────
+   Stat bar numbers — update as real data accumulates.
+   ────────────────────────────────────────────────────────────────────────── */
+const NUMEROS = [
+  { value: "320+", label: "EVs avaliados" },
+  { value: "98%", label: "clientes satisfeitos" },
+  { value: "<2h", label: "tempo médio de proposta" },
+  { value: "4.9★", label: "avaliação média" },
+];
+
 export default function LandingPage() {
   return (
     <div className="min-h-screen">
@@ -118,6 +152,28 @@ export default function LandingPage() {
                   </div>
                 ))}
               </dl>
+
+              {/* Guarantee strip */}
+              <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+                {[
+                  "Serviço gratuito",
+                  "Sem compromisso",
+                  "Pagamento por transferência",
+                ].map((g) => (
+                  <span
+                    key={g}
+                    className="flex items-center gap-1.5 text-[12px] text-muted-foreground"
+                  >
+                    <Check
+                      size={11}
+                      className="text-emerald-500 shrink-0"
+                      strokeWidth={2.5}
+                      aria-hidden
+                    />
+                    {g}
+                  </span>
+                ))}
+              </div>
             </div>
 
             {/* Right — Dark preview proposta card */}
@@ -200,7 +256,12 @@ export default function LandingPage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
-          3. PORQUÊ — split, 4 small spec cards + headline
+          3. NÚMEROS — dark stat bar, social proof
+          ════════════════════════════════════════════════════════════════════ */}
+      <NumerosSection />
+
+      {/* ════════════════════════════════════════════════════════════════════
+          4. PORQUÊ — split, 4 small spec cards + headline
           ════════════════════════════════════════════════════════════════════ */}
       <section
         aria-labelledby="porque-title"
@@ -278,7 +339,7 @@ export default function LandingPage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
-          4. MODELOS — single white card with internal grid
+          5. MODELOS — single white card with internal grid
           ════════════════════════════════════════════════════════════════════ */}
       <section
         aria-labelledby="modelos-title"
@@ -334,7 +395,12 @@ export default function LandingPage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
-          5. FAQ — narrow, light card-style
+          6. TESTEMUNHOS — 3 seller testimonial cards
+          ════════════════════════════════════════════════════════════════════ */}
+      <TestemunhosSection />
+
+      {/* ════════════════════════════════════════════════════════════════════
+          7. FAQ — narrow, light card-style
           ════════════════════════════════════════════════════════════════════ */}
       <section
         aria-labelledby="faq-title"
@@ -363,7 +429,7 @@ export default function LandingPage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════
-          6. CTA FINAL — dark anchor card on light bg
+          8. CTA FINAL — dark anchor card on light bg
           ════════════════════════════════════════════════════════════════════ */}
       <section className="pb-24 sm:pb-32">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
@@ -689,6 +755,160 @@ function SmallStat({
   );
 }
 
+/* ─── Números Section — dark stat bar ──────────────────────────────────── */
+function NumerosSection() {
+  return (
+    <section aria-label="Números em destaque" className="py-8 sm:py-12">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div
+          className="relative isolate overflow-hidden rounded-3xl"
+          style={{
+            background:
+              "linear-gradient(160deg, oklch(0.10 0.008 220) 0%, oklch(0.06 0 0) 100%)",
+            boxShadow:
+              "0 1px 0 oklch(1 0 0 / 0.05) inset, 0 24px 60px -20px oklch(0 0 0 / 0.4)",
+          }}
+        >
+          {/* Subtle grid pattern */}
+          <div
+            aria-hidden
+            className="absolute inset-0 opacity-[0.035] pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px)",
+              backgroundSize: "44px 44px",
+            }}
+          />
+
+          {/* Brand teal glow — right side */}
+          <div
+            aria-hidden
+            className="absolute right-0 top-0 bottom-0 w-1/3 pointer-events-none"
+            style={{
+              background:
+                "radial-gradient(ellipse 80% 80% at 100% 50%, color-mix(in oklab, var(--brand) 12%, transparent), transparent)",
+            }}
+          />
+
+          <dl className="relative grid grid-cols-2 lg:grid-cols-4">
+            {NUMEROS.map((n, i) => (
+              <div
+                key={n.label}
+                className={[
+                  "flex flex-col items-center justify-center py-10 sm:py-14 px-6 text-center border-white/[0.06]",
+                  // Mobile 2-col: right border on left column, bottom border on top row
+                  i === 0 ? "border-r border-b" : "",
+                  i === 1 ? "border-b" : "",
+                  i === 2 ? "border-r" : "",
+                  // Desktop 4-col: right border except last, no bottom border
+                  i < NUMEROS.length - 1 ? "lg:border-r" : "lg:border-r-0",
+                  "lg:border-b-0",
+                ].join(" ")}
+              >
+                <dt
+                  className="text-white tabular-nums font-semibold leading-none tracking-[-0.035em]"
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)",
+                    fontWeight: 600,
+                  }}
+                >
+                  {n.value}
+                </dt>
+                <dd className="mt-3 font-mono text-[10px] uppercase tracking-[0.18em] text-white/40">
+                  {n.label}
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ─── Star row — brand teal stars ───────────────────────────────────────── */
+function StarRow() {
+  return (
+    <div className="flex gap-0.5" aria-label="5 estrelas de 5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg
+          key={i}
+          width="13"
+          height="13"
+          viewBox="0 0 24 24"
+          fill="var(--brand)"
+          aria-hidden
+        >
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+/* ─── Testemunhos Section ───────────────────────────────────────────────── */
+function TestemunhosSection() {
+  return (
+    <section aria-labelledby="testemunhos-title" className="py-20 sm:py-28">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <header className="mb-10 sm:mb-12">
+          <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+            Testemunhos
+          </p>
+          <div className="mt-3 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
+            <h2
+              id="testemunhos-title"
+              className="font-extrabold tracking-[-0.025em] text-foreground"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 2.75rem)", fontWeight: 800 }}
+            >
+              Quem já vendeu.
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Serviço gratuito · sem compromisso até aceitares a proposta.
+            </p>
+          </div>
+        </header>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
+          {TESTIMONIALS.map((t) => (
+            <article
+              key={t.name}
+              className="group rounded-2xl bg-card border border-border/60 p-6 flex flex-col transition-all duration-300"
+              style={{ boxShadow: "var(--shadow-card)" }}
+            >
+              <StarRow />
+              <blockquote className="mt-4 text-[14px] leading-relaxed text-foreground/80 flex-1">
+                &ldquo;{t.quote}&rdquo;
+              </blockquote>
+              <footer className="mt-5 pt-4 border-t border-border/60 flex items-center gap-3">
+                {/* Avatar initials */}
+                <span
+                  className="size-8 rounded-full grid place-items-center text-[11px] font-semibold text-foreground/60 shrink-0"
+                  style={{
+                    background: "oklch(0.93 0.002 240)",
+                  }}
+                  aria-hidden
+                >
+                  {t.name.slice(0, 1)}
+                </span>
+                <div>
+                  <p className="text-[13px] font-semibold text-foreground leading-none">
+                    {t.name}
+                  </p>
+                  <p className="text-[11px] text-muted-foreground font-mono mt-0.5 leading-none">
+                    {t.car}
+                  </p>
+                </div>
+              </footer>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ─── Dark CTA card ─────────────────────────────────────────────────────── */
 function DarkCtaCard() {
   return (
@@ -729,6 +949,19 @@ function DarkCtaCard() {
             Menos de um minuto. Recebes uma proposta indicativa por SMS em
             poucas horas.
           </p>
+
+          {/* Bottom guarantee strip in CTA */}
+          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+            {["Gratuito", "Sem compromisso", "Pagamento garantido"].map((g) => (
+              <span
+                key={g}
+                className="flex items-center gap-1.5 text-[12px] text-white/50"
+              >
+                <Check size={11} className="text-emerald-400 shrink-0" strokeWidth={2.5} aria-hidden />
+                {g}
+              </span>
+            ))}
+          </div>
         </div>
 
         <div className="flex flex-col sm:flex-row lg:flex-col gap-3 sm:gap-3 lg:items-stretch">
