@@ -22,7 +22,7 @@ import { FaqAccordion } from "@/components/marketing/faq-accordion";
      (configured in next.config.ts → images.remotePatterns)
    ────────────────────────────────────────────────────────────────────────── */
 const PROPOSAL_PREVIEW_IMG =
-  "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=1200&q=85";
+  "https://images.vexels.com/media/users/3/128885/isolated/preview/62112c9b15fb4bf9e38567d6e436b2dd-tesla-car-svg.png";
 
 /* ──────────────────────────────────────────────────────────────────────────
    Landing — "Card-stack SaaS" direction
@@ -513,59 +513,36 @@ function ProposalPreviewCard() {
           </div>
         </div>
 
-        {/* ── Vehicle photo — hero visual ────────────────────────── */}
+        {/* ── Vehicle cutout — hero visual ───────────────────────── */}
         <div className="relative -mx-2 sm:-mx-4 mt-1 mb-1 aspect-[16/9]">
-          {/* Underglow — brand teal halo behind the car */}
+          {/* Brand teal underglow — slightly stronger now that the car is fully visible */}
           <div
             aria-hidden
-            className="absolute inset-x-12 bottom-2 h-16 blur-2xl opacity-60"
+            className="absolute inset-x-12 bottom-3 h-14 blur-2xl opacity-70"
             style={{
               background:
-                "radial-gradient(ellipse 60% 100% at 50% 100%, color-mix(in oklab, var(--brand) 70%, transparent), transparent)",
+                "radial-gradient(ellipse 55% 100% at 50% 100%, color-mix(in oklab, var(--brand) 75%, transparent), transparent)",
             }}
           />
 
-          {/* Photo */}
-          <div className="relative w-full h-full overflow-hidden rounded-2xl">
-            <Image
-              src={PROPOSAL_PREVIEW_IMG}
-              alt="Tesla Model 3 — exemplo ilustrativo"
-              fill
-              sizes="(min-width: 1024px) 480px, 100vw"
-              className="object-cover object-center"
-              priority
-              style={{
-                filter: "brightness(0.95) contrast(1.05) saturate(0.92)",
-              }}
-            />
-            {/* Top vignette to integrate with the dark card top */}
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(180deg, oklch(0.06 0.005 230) 0%, transparent 18%, transparent 80%, oklch(0.06 0.005 230 / 0.55) 100%)",
-              }}
-            />
-            {/* Side fade for blending */}
-            <div
-              aria-hidden
-              className="absolute inset-0 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(90deg, oklch(0.08 0.005 230 / 0.35) 0%, transparent 12%, transparent 88%, oklch(0.08 0.005 230 / 0.35) 100%)",
-              }}
-            />
-          </div>
-
-          {/* Reflection floor */}
+          {/* Ground shadow — soft elliptical drop under wheels */}
           <div
             aria-hidden
-            className="absolute inset-x-6 -bottom-1 h-2 blur-md opacity-40"
+            className="absolute left-1/2 -translate-x-1/2 bottom-2 w-[78%] h-3 blur-md opacity-65"
             style={{
               background:
-                "linear-gradient(180deg, oklch(1 0 0 / 0.10) 0%, transparent 100%)",
+                "radial-gradient(ellipse 50% 100% at 50% 50%, oklch(0 0 0 / 0.55), transparent 70%)",
             }}
+          />
+
+          {/* The car cutout itself */}
+          <Image
+            src={PROPOSAL_PREVIEW_IMG}
+            alt="Tesla Model 3 — exemplo ilustrativo"
+            fill
+            sizes="(min-width: 1024px) 480px, 100vw"
+            className="object-contain object-center select-none pointer-events-none"
+            priority
           />
         </div>
 
