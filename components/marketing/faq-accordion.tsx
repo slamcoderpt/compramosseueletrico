@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "Quanto tempo demora todo o processo?",
     answer:
-      "Preencher o formulário demora menos de 1 minuto. A nossa avaliação e proposta chegam-te por SMS em menos de 1 hora. A inspeção presencial tem uma duração semelhante — a avaliação da saúde da bateria requer algum tempo mas é feita no próprio dia. O pagamento é processado nas 24 horas seguintes à inspeção.",
+      "Preencher o formulário demora menos de 1 minuto. A nossa avaliação e proposta chegam-te por SMS em menos de 1 hora. Na inspeção presencial, o teste de saúde da bateria pode demorar até 24 horas — é o tempo necessário para uma leitura rigorosa. O pagamento é processado assim que o teste estiver concluído.",
   },
   {
     question: "Onde ficam? Tenho de levar o carro?",
