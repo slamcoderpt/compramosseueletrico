@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "Quanto tempo demora todo o processo?",
     answer:
-      "A avaliação demora menos de 1 minuto. Após receberes a proposta, podes aceitar de imediato. O pagamento é processado nas 24 horas seguintes à verificação do veículo. Na prática, a maioria dos vendedores conclui tudo em menos de dois dias.",
+      "Preencher o formulário demora menos de 1 minuto. A nossa avaliação e proposta chegam-te por SMS em menos de 1 hora. A inspeção presencial tem uma duração semelhante — a avaliação da saúde da bateria requer algum tempo mas é feita no próprio dia. O pagamento é processado nas 24 horas seguintes à inspeção.",
   },
   {
     question: "Onde ficam? Tenho de levar o carro?",
