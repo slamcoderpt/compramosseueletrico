@@ -28,8 +28,8 @@ const cspParts = [
 ];
 
 const nextConfig: NextConfig = {
-  // Standalone output — required for lean Docker image (no full node_modules copy)
-  output: "standalone",
+  // output: "standalone" — ativar apenas para Docker (desligar para Vercel)
+  // output: "standalone",
   images: {
     remotePatterns: [
       {
