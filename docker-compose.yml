@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    ports:
+      - "3000:3000"      # acede via http://<IP_DA_TUA_MAQUINA>:3000
+    env_file:
+      - .env.local       # as tuas vars de ambiente (Supabase, Twilio, etc.)
+    restart: unless-stopped

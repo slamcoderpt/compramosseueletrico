@@ -28,6 +28,8 @@ const cspParts = [
 ];
 
 const nextConfig: NextConfig = {
+  // Standalone output — required for lean Docker image (no full node_modules copy)
+  output: "standalone",
   images: {
     remotePatterns: [
       {
