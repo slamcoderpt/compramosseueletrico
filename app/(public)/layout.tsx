@@ -130,12 +130,7 @@ export default function PublicLayout({
                   compramososeueletrico
                 </span>
               </div>
-              <p className="text-[11px] text-muted-foreground font-mono tracking-wide">
-                Lesscode Consulting, Lda · NIF 518 609 375
-              </p>
-              <p className="text-[11px] text-muted-foreground font-mono tracking-wide">
-                Rua de Beba, 125 · 4660-052 Cárquere · Resende
-              </p>
+              {/* TODO: adicionar NIF e morada da Lesscode Consulting Lda antes do lançamento */}
             </div>
 
             {/* Legal links + WhatsApp */}
